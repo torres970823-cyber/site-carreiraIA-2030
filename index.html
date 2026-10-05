@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impacto da IA em 2030 - O Futuro do Trabalho</title>
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -36,7 +36,6 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
         }
-        /* Ajuste de scroll das páginas */
         section {
             scroll-margin-top: 5rem;
         }
@@ -52,9 +51,9 @@
                 <span class="text-xl font-extrabold tracking-wide">IA & Trabalho <span class="gradient-text">2030</span></span>
             </a>
             <nav class="hidden md:flex gap-8 text-slate-300 font-medium text-sm">
-                <a href="#pagina1" class="hover:text-sky-400 transition">1. Visão Geral</a>
+                <a href="#pagina1" class="hover:text-sky-400 transition">1. Panorama</a>
                 <a href="#pagina2" class="hover:text-sky-400 transition">2. Métricas & Setores</a>
-                <a href="#pagina3" class="hover:text-sky-400 transition">3. Simulador de Risco</a>
+                <a href="#pagina3" class="hover:text-sky-400 transition">3. Simulador</a>
                 <a href="#pagina4" class="hover:text-sky-400 transition">4. Soluções & Ferramentas</a>
             </nav>
             <a href="formulario_veiculos.html" target="_blank" class="btn-gradient text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl flex items-center gap-2">
@@ -74,19 +73,78 @@
 
     <main class="space-y-24 pb-20">
 
-        <!-- ================= PÁGINA 1: VISÃO GERAL & PANORAMA ================= -->
-        <section id="pagina1" class="min-h-[85vh] pt-12 px-6 max-w-7xl mx-auto flex flex-col justify-center">
+        <!-- ================= SEÇÃO 1: PANORAMA GERAL ================= -->
+        <section id="pagina1" class="min-h-[80vh] pt-12 px-6 max-w-7xl mx-auto flex flex-col justify-center">
             <div class="text-center max-w-4xl mx-auto space-y-6">
                 <span class="text-xs uppercase tracking-widest text-sky-400 bg-sky-950/80 border border-sky-800/60 px-4 py-1.5 rounded-full font-semibold inline-block">
-                    Página 1 • Estudo Prospectivo para 2030
+                    Relatório Prospectivo para 2030
                 </span>
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
                     O Impacto da Inteligência Artificial na <br class="hidden md:inline">
                     <span class="gradient-text">Nova Era do Trabalho Global</span>
                 </h1>
                 <p class="text-slate-300 text-base md:text-lg leading-relaxed">
-                    Até 2030, a automação baseada em IA generativa e sistemas autônomos reformulará a produtividade global. Analise projeções, acompanhe riscos por setor e simule o impacto no seu cargo[cite: 1, 2].
+                    A automação inteligente e a análise preditiva estão transformando modelos de negócios. Explore projeções de mercado, dados de escolaridade e simule o impacto direto no seu setor[cite: 2].
                 </p>
                 
                 <div class="pt-4 flex flex-wrap justify-center gap-4">
-                    <a href="#pagina2" class="btn-gradient text-white px-6
+                    <a href="#pagina2" class="btn-gradient text-white px-6 py-3.5 rounded-xl font-semibold text-sm flex items-center gap-2">
+                        Ver Análise de Setores <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#pagina3" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-6 py-3.5 rounded-xl font-semibold text-sm transition">
+                        Simular Minha Profissão
+                    </a>
+                </div>
+            </div>
+
+            <!-- KPIs em Destaque -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
+                <div class="glass-card p-6 border-l-4 border-emerald-500">
+                    <div class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
+                        <span>Saldo de Vagas</span>
+                        <i data-lucide="trending-up" class="w-5 h-5 text-emerald-400"></i>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white mt-2">+12.5M</div>
+                    <p class="text-xs text-emerald-400 mt-1 font-medium">+8.4% novas oportunidades líquidas[cite: 2]</p>
+                </div>
+
+                <div class="glass-card p-6 border-l-4 border-sky-500">
+                    <div class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
+                        <span>Reajuste Salarial</span>
+                        <i data-lucide="dollar-sign" class="w-5 h-5 text-sky-400"></i>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white mt-2">+18.2%</div>
+                    <p class="text-xs text-sky-400 mt-1 font-medium">Média para profissionais qualificados[cite: 2]</p>
+                </div>
+
+                <div class="glass-card p-6 border-l-4 border-purple-500">
+                    <div class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
+                        <span>Exigência Educacional</span>
+                        <i data-lucide="graduation-cap" class="w-5 h-5 text-purple-400"></i>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white mt-2">64.0%</div>
+                    <p class="text-xs text-purple-400 mt-1 font-medium">Cargos exigirão capacitação em IA[cite: 2]</p>
+                </div>
+
+                <div class="glass-card p-6 border-l-4 border-amber-500">
+                    <div class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
+                        <span>Automação de Tarefas</span>
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-400"></i>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white mt-2">32.5%</div>
+                    <p class="text-xs text-amber-400 mt-1 font-medium">Rotinas operacionais afetadas[cite: 2]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Espaço de Anúncio Intermediário -->
+        <div class="px-6 max-w-7xl mx-auto w-full">
+            <div class="bg-slate-900/60 border border-dashed border-slate-700/60 rounded-xl p-3 text-center text-xs text-slate-400">
+                <span class="bg-slate-800 text-slate-400 text-[10px] uppercase px-2 py-0.5 rounded mr-2 font-bold">Anúncio</span>
+                Espaço Patrocinado - Cursos e Treinamentos em Inteligência Artificial para 2030
+            </div>
+        </div>
+
+        <!-- ================= SEÇÃO 2: MÉTRICAS E ANÁLISE POR SETOR ================= -->
+        <section id="pagina2" class="min-h-[80vh] pt-12 px-6 max-w-7xl mx-auto">
+            <div class
