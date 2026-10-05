@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impacto da IA em 2030 - O Futuro do Trabalho</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js para Gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: #0b0f19;
+            color: #f1f5f9;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
         .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 1rem;
         }
         .gradient-text {
-            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -31,118 +34,59 @@
         }
         .btn-gradient:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+        /* Ajuste de scroll das páginas */
+        section {
+            scroll-margin-top: 5rem;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-    <!-- Header / Navbar -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md fixed top-0 w-full z-50">
+    <!-- Header Fixa com Navegação Deslizante -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md fixed top-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
+            <a href="#pagina1" class="flex items-center gap-2">
                 <i data-lucide="cpu" class="w-8 h-8 text-sky-400"></i>
-                <span class="text-xl font-bold tracking-wide">IA & Trabalho <span class="gradient-text">2030</span></span>
-            </div>
+                <span class="text-xl font-extrabold tracking-wide">IA & Trabalho <span class="gradient-text">2030</span></span>
+            </a>
             <nav class="hidden md:flex gap-8 text-slate-300 font-medium text-sm">
-                <a href="#overview" class="hover:text-sky-400 transition">Visão Geral</a>
-                <a href="#impacts" class="hover:text-sky-400 transition">Impactos por Setor</a>
-                <a href="#ferramentas" class="hover:text-sky-400 transition">Ferramentas</a>
+                <a href="#pagina1" class="hover:text-sky-400 transition">1. Visão Geral</a>
+                <a href="#pagina2" class="hover:text-sky-400 transition">2. Métricas & Setores</a>
+                <a href="#pagina3" class="hover:text-sky-400 transition">3. Simulador de Risco</a>
+                <a href="#pagina4" class="hover:text-sky-400 transition">4. Soluções & Ferramentas</a>
             </nav>
-            <a href="formulario_veiculos.html" target="_blank" class="btn-gradient text-white text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2">
-                <i data-lucide="truck" class="w-4 h-4"></i> Acessar Ferramenta
+            <a href="formulario_veiculos.html" target="_blank" class="btn-gradient text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl flex items-center gap-2">
+                <i data-lucide="truck" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Abrir Ferramenta</span>
             </a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="pt-36 pb-20 px-6 max-w-7xl mx-auto text-center" id="overview">
-        <span class="text-xs uppercase tracking-widest text-sky-400 bg-sky-950/60 border border-sky-800/50 px-4 py-1.5 rounded-full font-semibold">
-            Projeções e Métricas para 2030
-        </span>
-        <h1 class="text-4xl md:text-6xl font-extrabold mt-6 mb-6 leading-tight">
-            Como a Inteligência Artificial Reorganizará o <br class="hidden md:inline">
-            <span class="gradient-text">Mercado de Trabalho Global</span>
-        </h1>
-        <p class="text-slate-400 text-lg max-w-3xl mx-auto mb-10 leading-relaxed">
-            Análise detalhada sobre automação de processos, transição de carreira, exigência educacional e a convivência entre profissionais e automação em larga escala[cite: 2].
-        </p>
-
-        <!-- KPI Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-left mt-12">
-            <div class="glass-card p-6">
-                <div class="text-slate-400 text-sm font-medium flex justify-between items-center mb-2">
-                    <span>Saldo Líquido de Vagas</span>
-                    <i data-lucide="trending-up" class="w-5 h-5 text-emerald-400"></i>
-                </div>
-                <div class="text-3xl font-bold text-slate-100">+12.5M</div>
-                <div class="text-xs text-emerald-400 mt-2 font-medium">+8.4% em relação ao período pré-IA[cite: 2]</div>
-            </div>
-
-            <div class="glass-card p-6">
-                <div class="text-slate-400 text-sm font-medium flex justify-between items-center mb-2">
-                    <span>Variação Salarial Média</span>
-                    <i data-lucide="dollar-sign" class="w-5 h-5 text-sky-400"></i>
-                </div>
-                <div class="text-3xl font-bold text-slate-100">+18.2%</div>
-                <div class="text-xs text-sky-400 mt-2 font-medium">Para funções requalificadas[cite: 2]</div>
-            </div>
-
-            <div class="glass-card p-6">
-                <div class="text-slate-400 text-sm font-medium flex justify-between items-center mb-2">
-                    <span>Taxa Elevação Escolaridade</span>
-                    <i data-lucide="graduation-cap" class="w-5 h-5 text-indigo-400"></i>
-                </div>
-                <div class="text-3xl font-bold text-slate-100">64.0%</div>
-                <div class="text-xs text-indigo-400 mt-2 font-medium">Exigência de qualificação avançada[cite: 2]</div>
-            </div>
-
-            <div class="glass-card p-6">
-                <div class="text-slate-400 text-sm font-medium flex justify-between items-center mb-2">
-                    <span>Risco de Automação</span>
-                    <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-400"></i>
-                </div>
-                <div class="text-3xl font-bold text-slate-100">32.5%</div>
-                <div class="text-xs text-amber-400 mt-2 font-medium">Tarefas repetitivas afetadas[cite: 2]</div>
-            </div>
+    <!-- Espaço de Anúncio Superior (Ad Banner Top) -->
+    <div class="pt-24 px-6 max-w-7xl mx-auto w-full">
+        <div class="bg-slate-900/60 border border-dashed border-slate-700/60 rounded-xl p-3 text-center text-xs text-slate-400 tracking-wider">
+            <span class="bg-slate-800 text-slate-400 text-[10px] uppercase px-2 py-0.5 rounded mr-2 font-bold">Publicidade</span>
+            Espaço para Anúncio Google AdSense / Banner do Patrocinador (728x90)
         </div>
-    </section>
+    </div>
 
-    <!-- Banner de Integração com a Ferramenta Criada -->
-    <section class="px-6 my-12 max-w-7xl mx-auto" id="ferramentas">
-        <div class="glass-card p-8 md:p-12 relative overflow-hidden border-sky-500/30">
-            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
-                <div class="space-y-4 max-w-2xl">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-sky-400 bg-sky-900/40 px-3 py-1 rounded-md border border-sky-700/50">
-                        Ferramenta em Destaque
-                    </span>
-                    <h2 class="text-2xl md:text-3xl font-bold">Sistema Integrado de Apontamento de Frota</h2>
-                    <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-                        Exemplo prático de automação de fluxo de trabalho: utilize o formulário inteligente conectado em tempo real à base de dados para registrar veículos, horas de uso e combustíveis.
-                    </p>
-                </div>
-                <div class="flex-shrink-0">
-                    <a href="formulario_veiculos.html" target="_blank" class="btn-gradient px-6 py-3.5 rounded-xl text-white font-bold text-sm flex items-center gap-3">
-                        <span>Abrir Ferramenta Criada</span>
-                        <i data-lucide="external-link" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main class="space-y-24 pb-20">
 
-    <!-- Impactos por Setor -->
-    <section class="py-16 px-6 max-w-7xl mx-auto" id="impacts">
-        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">Transformações por Setor em 2030[cite: 2]</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass-card p-6">
-                <div class="w-12 h-12 bg-sky-950 rounded-lg flex items-center justify-center mb-4 text-sky-400">
-                    <i data-lucide="wrench" class="w-6 h-6"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">Operações & Logística</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Adoção massiva de sensoriamento IoT e coleta automatizada de dados operacionais (como a ferramenta de frotas), otimizando rotas e reduzindo manutenção preditiva.
+        <!-- ================= PÁGINA 1: VISÃO GERAL & PANORAMA ================= -->
+        <section id="pagina1" class="min-h-[85vh] pt-12 px-6 max-w-7xl mx-auto flex flex-col justify-center">
+            <div class="text-center max-w-4xl mx-auto space-y-6">
+                <span class="text-xs uppercase tracking-widest text-sky-400 bg-sky-950/80 border border-sky-800/60 px-4 py-1.5 rounded-full font-semibold inline-block">
+                    Página 1 • Estudo Prospectivo para 2030
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+                    O Impacto da Inteligência Artificial na <br class="hidden md:inline">
+                    <span class="gradient-text">Nova Era do Trabalho Global</span>
+                </h1>
+                <p class="text-slate-300 text-base md:text-lg leading-relaxed">
+                    Até 2030, a automação baseada em IA generativa e sistemas autônomos reformulará a produtividade global. Analise projeções, acompanhe riscos por setor e simule o impacto no seu cargo[cite: 1, 2].
                 </p>
+                
+                <div class="pt-4 flex flex-wrap justify-center gap-4">
+                    <a href="#pagina2" class="btn-gradient text-white px-6
