@@ -3,373 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Feed - IA 2030 & Gestão Integrada</title>
+    <title>The Global Intelligence Report — O Impacto da IA até 2030</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts (Estilo Editorial NYT) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chomsky&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,600&family=Franklin+Gothic+Medium&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --nyt-black: #121212;
+            --nyt-paper: #f9f8f6;
+            --nyt-border: #e2e2e2;
+            --nyt-gray: #666666;
+            --nyt-accent: #052962;
+        }
+
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--nyt-paper);
+            color: var(--nyt-black);
+            font-family: 'Source Serif 4', Georgia, serif;
+            -webkit-font-smoothing: antialiased;
         }
-        .feed-card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 0.75rem;
+
+        .font-headline {
+            font-family: 'Playfair Display', Georgia, serif;
         }
+
+        .font-sans-nyt {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .nyt-header-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            letter-spacing: -0.02em;
+        }
+
+        .border-nyt-double {
+            border-top: 3px double #121212;
+            border-bottom: 1px solid #121212;
+        }
+
+        .border-nyt-thin {
+            border-color: #e2e2e2;
+        }
+
+        .dropcap::first-letter {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 4.2rem;
+            float: left;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-bottom: 0;
+            font-weight: 700;
+        }
+
         .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #0f172a;
+            background: #f1f1f1;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 3px;
+            background: #888;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-neutral-200">
 
-    <!-- Top Navigation Bar (Estilo Facebook Header) -->
-    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-2.5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            
-            <!-- Logo & Pesquisa -->
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-blue-500/30">
-                    ia
-                </div>
-                <div class="relative hidden sm:block">
-                    <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-slate-400"></i>
-                    <input type="text" placeholder="Pesquisar relatórios, vagas, frotas..." class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-full pl-9 pr-4 py-2 w-64 focus:outline-none focus:border-blue-500">
-                </div>
+    <!-- Top Bar / Utilitários -->
+    <div class="border-b border-neutral-200 text-[11px] font-sans-nyt text-neutral-600 px-4 py-1.5 bg-neutral-100/50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span class="font-bold text-neutral-900">EDIÇÃO ESPECIAL: 2026–2030</span>
+                <span class="hidden md:inline">|</span>
+                <span class="hidden md:inline" id="current-date">Segunda-feira, 5 de Outubro de 2026</span>
             </div>
+            <div class="flex items-center gap-4">
+                <a href="#ferramentas-diagnostico" class="hover:underline font-semibold text-neutral-900">Ir para Diagnóstico de Cargos & CV</a>
+                <span>•</span>
+                <a href="#artigos" class="hover:underline">Análises de Mercado</a>
+            </div>
+        </div>
+    </div>
 
-            <!-- Navegação Central -->
-            <div class="flex items-center gap-2 md:gap-8 text-slate-400">
-                <a href="#feed" class="p-2.5 text-blue-500 border-b-2 border-blue-500 hover:text-blue-400 transition" title="Feed Principal">
-                    <i data-lucide="home" class="w-6 h-6"></i>
-                </a>
-                <a href="#simulador" class="p-2.5 hover:text-blue-400 transition" title="Simulador de Carreira">
-                    <i data-lucide="calculator" class="w-6 h-6"></i>
-                </a>
-                <a href="formulario_veiculos.html" target="_blank" class="p-2.5 hover:text-blue-400 transition relative" title="Sistema de Frota">
-                    <i data-lucide="truck" class="w-6 h-6"></i>
-                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping"></span>
-                </a>
-            </div>
+    <!-- Cabeçalho Principal (Estilo NYT Journalistic Header) -->
+    <header class="max-w-7xl mx-auto px-4 w-full pt-6 pb-4">
+        <div class="text-center space-y-2">
+            <p class="text-xs tracking-[0.2em] font-sans-nyt uppercase text-neutral-500 font-medium">Relatório Especial de Tecnologia & Economia Global</p>
+            <h1 class="text-4xl md:text-6xl font-black nyt-header-title tracking-tight text-neutral-900">The Future Work Report</h1>
+            <p class="text-xs italic text-neutral-600 font-serif">"Analisando as transformações produtivas, automação e requalificação profissional até a virada da década."</p>
+        </div>
 
-            <!-- Perfil & Ações -->
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-full border border-slate-700">
-                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center text-xs font-bold text-white">
-                        OP
-                    </div>
-                    <span class="text-xs font-semibold text-slate-200 hidden md:inline">Operador IA</span>
-                </div>
-            </div>
+        <!-- Linha Dupla Clássica de Jornal -->
+        <div class="border-nyt-double my-4 py-2 flex justify-between items-center text-xs font-sans-nyt uppercase tracking-wider text-neutral-700">
+            <div>Vol. CXXVIII... No. 58,920</div>
+            <div class="hidden sm:block font-bold">A Revolução da IA Generativa & Mercado de Trabalho 2030</div>
+            <div>São Paulo & Nova York</div>
         </div>
     </header>
 
-    <!-- Conteúdo Principal - Grid Estilo Social (Sidebar Esquerda + Feed + Sidebar Direita) -->
-    <div class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 w-full flex-1">
+    <!-- Conteúdo Principal -->
+    <main class="max-w-7xl mx-auto px-4 flex-1 w-full space-y-12">
 
-        <!-- SIDEBAR ESQUERDA (Atalhos & Menu) -->
-        <aside class="hidden lg:block lg:col-span-3 space-y-4 sticky top-20 h-fit">
-            <div class="feed-card p-4 space-y-3">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Atalhos do Ecossistema</h3>
-                <nav class="space-y-1 text-sm font-medium">
-                    <a href="#feed" class="flex items-center gap-3 px-3 py-2 text-slate-200 hover:bg-slate-800 rounded-lg transition">
-                        <i data-lucide="newspaper" class="w-5 h-5 text-blue-400"></i> Feed de Notícias
-                    </a>
-                    <a href="#graficos" class="flex items-center gap-3 px-3 py-2 text-slate-200 hover:bg-slate-800 rounded-lg transition">
-                        <i data-lucide="line-chart" class="w-5 h-5 text-emerald-400"></i> Métricas 2030
-                    </a>
-                    <a href="#simulador" class="flex items-center gap-3 px-3 py-2 text-slate-200 hover:bg-slate-800 rounded-lg transition">
-                        <i data-lucide="cpu" class="w-5 h-5 text-purple-400"></i> Testar Minha Área
-                    </a>
-                    <a href="formulario_veiculos.html" target="_blank" class="flex items-center gap-3 px-3 py-2 text-slate-200 hover:bg-slate-800 rounded-lg transition">
-                        <i data-lucide="truck" class="w-5 h-5 text-amber-400"></i> Formulário de Frota
-                    </a>
-                </nav>
-            </div>
+        <!-- MANCHETE PRINCIPAL & PAINEL DE FERRAMENTAS -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-neutral-300 pb-12">
 
-            <!-- Banner Lateral AdSense -->
-            <div class="bg-slate-900/80 border border-dashed border-slate-700/80 rounded-xl p-4 text-center text-xs text-slate-400">
-                <span class="bg-slate-800 text-slate-400 text-[10px] uppercase px-2 py-0.5 rounded font-bold">Patrocinado</span>
-                <p class="mt-2 text-slate-300 font-semibold">Análise Preditiva & IoT</p>
-                <p class="text-[11px] text-slate-500 mt-1">Conecte sua frota aos modelos computacionais de 2030.</p>
-            </div>
-        </aside>
-
-        <!-- FEED CENTRAL (Rolo de Publicações Continuo) -->
-        <main id="feed" class="lg:col-span-6 space-y-6">
-
-            <!-- Caixa de Criação de Post (Estilo 'No que você está pensando?') -->
-            <div class="feed-card p-4 space-y-3">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center font-bold text-xs text-white">
-                        OP
-                    </div>
-                    <input type="text" placeholder="No que você está pensando sobre a automação até 2030?" class="w-full bg-slate-900 border border-slate-700 text-xs text-slate-200 rounded-full px-4 py-3 focus:outline-none focus:border-blue-500">
-                </div>
-                <div class="border-t border-slate-800 pt-3 flex justify-between items-center text-xs text-slate-400">
-                    <button class="flex items-center gap-2 hover:bg-slate-800 px-3 py-1.5 rounded-lg transition">
-                        <i data-lucide="bar-chart-2" class="w-4 h-4 text-blue-400"></i> Relatório
-                    </button>
-                    <button class="flex items-center gap-2 hover:bg-slate-800 px-3 py-1.5 rounded-lg transition">
-                        <i data-lucide="file-text" class="w-4 h-4 text-emerald-400"></i> Apontamento
-                    </button>
-                    <button class="flex items-center gap-2 hover:bg-slate-800 px-3 py-1.5 rounded-lg transition">
-                        <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i> Projeção
-                    </button>
-                </div>
-            </div>
-
-            <!-- POST 1: Anúncio Principal do Estudo 2030 -->
-            <article class="feed-card overflow-hidden">
-                <div class="p-4 flex items-center justify-between border-b border-slate-800">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-sky-600/30 border border-sky-500 flex items-center justify-center text-sky-400">
-                            <i data-lucide="globe" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-bold text-slate-100">Observatório Global do Trabalho</h4>
-                            <p class="text-[11px] text-slate-400">Publicado agora mesmo • <span class="text-blue-400">Destaque</span></p>
-                        </div>
-                    </div>
-                    <i data-lucide="more-horizontal" class="w-5 h-5 text-slate-400 cursor-pointer"></i>
-                </div>
-
-                <div class="p-4 space-y-3">
-                    <p class="text-sm text-slate-300 leading-relaxed">
-                        📊 <strong>Projeções Oficiais para 2030:</strong> O mercado de trabalho está passando por sua maior reestruturação tecnológica. A inteligência artificial continuará absorvendo processos operacionais e abrindo novos postos estratégicos.
+            <!-- Coluna Principal (Notícia Destaque) -->
+            <article class="lg:col-span-8 space-y-6">
+                <div class="space-y-3">
+                    <span class="text-xs font-bold font-sans-nyt tracking-widest text-red-700 uppercase">Análise de Fronteira</span>
+                    <h2 class="text-3xl md:text-5xl font-black font-headline leading-tight text-neutral-900">
+                        O Grande Redesenho Operacional: Como a Inteligência Artificial Reestuturará 85 Milhões de Postos até 2030
+                    </h2>
+                    <p class="text-lg md:text-xl font-serif text-neutral-700 leading-relaxed italic">
+                        Estudos apontam que a automação cognitiva não destruirá carreiras em massa, mas exigirá a fusão de habilidades técnicas e decisão estratégica para quase todas as posições corporativas.
                     </p>
-                    
-                    <div class="grid grid-cols-2 gap-3 pt-2">
-                        <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
-                            <span class="text-[10px] text-slate-400 uppercase block font-semibold">Criação Líquida</span>
-                            <span class="text-xl font-extrabold text-emerald-400">+12.5 Mi</span>
-                            <span class="text-[11px] text-slate-400 block mt-0.5">Postos especializados</span>
-                        </div>
-                        <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
-                            <span class="text-[10px] text-slate-400 uppercase block font-semibold">Demanda Educacional</span>
-                            <span class="text-xl font-extrabold text-purple-400">64%</span>
-                            <span class="text-[11px] text-slate-400 block mt-0.5">Exigem IA/Dados</span>
-                        </div>
+                    <div class="flex items-center gap-3 text-xs font-sans-nyt text-neutral-500 pt-2 border-t border-neutral-200">
+                        <span>Por <strong>Redação do Relatório de Tecnologia</strong></span>
+                        <span>•</span>
+                        <span>Tempo de leitura: 6 min</span>
                     </div>
                 </div>
 
-                <!-- Reações e Ações do Post -->
-                <div class="px-4 py-2 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
-                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="thumbs-up" class="w-4 h-4"></i> Curtir (142)</button>
-                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="message-square" class="w-4 h-4"></i> Comentar (28)</button>
-                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="share-2" class="w-4 h-4"></i> Compartilhar</button>
+                <div class="my-6">
+                    <div class="bg-neutral-100 p-2 border border-neutral-300">
+                        <div class="relative h-72 md:h-96 w-full bg-neutral-900 flex items-center justify-center text-white overflow-hidden">
+                            <!-- Visual do Gráfico de Dados do Feed -->
+                            <canvas id="nytSectorChart" class="p-4"></canvas>
+                        </div>
+                        <p class="text-[11px] font-sans-nyt text-neutral-600 mt-2 italic text-right">
+                            Figura 1.0: Mapeamento de Automação Repetitiva vs. Criação de Novos Cargos em IA por Setor Econômico (Projeção 2030).
+                        </p>
+                    </div>
                 </div>
+
+                <p class="dropcap text-base md:text-lg leading-relaxed text-neutral-800">
+                    A transição para ecossistemas de trabalho orientados por IA representa uma mudança de paradigma comparável à Revolução Industrial, porém em uma velocidade exponencialmente maior. Posições operacionais antes baseadas em execução manual ou processamento básico de dados estão sendo assimiladas por modelos preditivos e agentes autônomos. De acordo com os relatórios consolidados do Fórum Econômico Mundial e pesquisas setoriais, mais de 60% dos trabalhadores necessitarão de requalificação até 2030.
+                </p>
+
+                <p class="text-base md:text-lg leading-relaxed text-neutral-800">
+                    Entretanto, o surgimento de novas categorias de emprego — como Engenharia de Prompts, Auditores de Modelos de Linguagem e Gestores de Integração Homem-Máquina — promete criar milhões de novas oportunidades. O grande desafio da década não será a falta de trabalho, mas sim o desalinhamento entre as habilidades exigidas pelas empresas e o currículo atual dos profissionais.
+                </p>
             </article>
 
-            <!-- POST 2: Gráfico Interativo no Feed (Métricas por Setor) -->
-            <article id="graficos" class="feed-card overflow-hidden">
-                <div class="p-4 flex items-center justify-between border-b border-slate-800">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-indigo-600/30 border border-indigo-500 flex items-center justify-center text-indigo-400">
-                            <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
-                        </div>
+            <!-- Coluna Lateral: FERRAMENTAS DE INTERAÇÃO E DIAGNÓSTICO DO CARGO -->
+            <aside id="ferramentas-diagnostico" class="lg:col-span-4 space-y-6 lg:border-l lg:border-neutral-300 lg:pl-8">
+                
+                <!-- CAIXA DE DESTAQUE: FERRAMENTA DE ANÁLISE DE CARGO E CV -->
+                <div class="bg-neutral-100 border-2 border-neutral-900 p-5 space-y-4 shadow-sm">
+                    <div class="border-b border-neutral-400 pb-2">
+                        <span class="text-[10px] font-sans-nyt font-bold tracking-widest text-neutral-500 uppercase block">Ferramenta Interativa</span>
+                        <h3 class="text-xl font-bold font-headline text-neutral-900">Analisador de Cargo & CV 2030</h3>
+                        <p class="text-xs text-neutral-600 font-sans-nyt mt-1">Verifique o nível de prontidão do seu perfil profissional para os requisitos do mercado em 2030.</p>
+                    </div>
+
+                    <form onsubmit="analisarCV(event)" class="space-y-3 font-sans-nyt">
                         <div>
-                            <h4 class="text-sm font-bold text-slate-100">Painel Estatístico Avançado</h4>
-                            <p class="text-[11px] text-slate-400">Atualização em tempo real</p>
+                            <label class="block text-xs font-bold text-neutral-800 mb-1">Cargo / Vaga Pretendida:</label>
+                            <input type="text" id="vagaDesejada" required placeholder="Ex: Analista Financeiro, Gestor, Dev..." class="w-full bg-white border border-neutral-400 text-xs text-neutral-900 p-2.5 focus:outline-none focus:border-neutral-900">
                         </div>
-                    </div>
-                </div>
 
-                <div class="p-4 space-y-3">
-                    <p class="text-sm text-slate-300">
-                        Comparativo percentual de <strong>automação de tarefas rotineiras vs. criação de novas posições</strong> por setor econômico:
-                    </p>
-                    <div class="relative h-64 w-full bg-slate-900/60 p-2 rounded-xl border border-slate-800">
-                        <canvas id="feedSectorChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="px-4 py-2 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
-                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="thumbs-up" class="w-4 h-4"></i> Útil (89)</button>
-                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="share-2" class="w-4 h-4"></i> Compartilhar</button>
-                </div>
-            </article>
-
-            <!-- POST 3: Ferramenta Prática Integrada (Apontamento de Frota) -->
-            <article class="feed-card overflow-hidden border-blue-500/40">
-                <div class="p-4 flex items-center justify-between border-b border-slate-800 bg-blue-950/20">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-emerald-600/30 border border-emerald-500 flex items-center justify-center text-emerald-400">
-                            <i data-lucide="truck" class="w-5 h-5"></i>
-                        </div>
                         <div>
-                            <h4 class="text-sm font-bold text-slate-100">Solução Prática: Sistema de Frotas</h4>
-                            <p class="text-[11px] text-emerald-400 font-semibold">Ferramenta Externa Pronta</p>
+                            <label class="block text-xs font-bold text-neutral-800 mb-1">Cole o Resumo do seu CV ou Atividades:</label>
+                            <textarea id="textoCV" rows="4" required placeholder="Cole aqui seu currículo ou principais competências atuais..." class="w-full bg-white border border-neutral-400 text-xs text-neutral-900 p-2.5 focus:outline-none focus:border-neutral-900 custom-scrollbar"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs uppercase tracking-wider py-3 px-4 transition flex items-center justify-center gap-2">
+                            <i data-lucide="cpu" class="w-4 h-4"></i>
+                            <span>Analisar Meu Cargo para 2030</span>
+                        </button>
+                    </form>
+
+                    <!-- Resultado da Análise -->
+                    <div id="resultadoCV" class="hidden space-y-3 p-4 bg-white border border-neutral-400 font-sans-nyt text-xs">
+                        <div class="flex justify-between items-center border-b border-neutral-200 pb-2">
+                            <span class="font-bold uppercase tracking-wider text-neutral-600 text-[10px]">Aderência Prevista</span>
+                            <span id="cvAderenciaScore" class="text-2xl font-black text-neutral-900">0%</span>
+                        </div>
+
+                        <div class="space-y-1">
+                            <strong class="text-neutral-900 block font-bold">Diagnóstico de Diagnóstico:</strong>
+                            <p id="cvPontoForte" class="text-neutral-700 leading-normal"></p>
+                        </div>
+
+                        <div class="space-y-1">
+                            <strong class="text-neutral-900 block font-bold">Lacunas para 2030:</strong>
+                            <p id="cvGaps" class="text-neutral-700 leading-normal"></p>
+                        </div>
+
+                        <div class="bg-neutral-100 p-2 border-l-2 border-neutral-900 text-[11px]">
+                            <strong class="block text-neutral-900">Recomendação do Relatório:</strong>
+                            <span id="cvRecomendacao" class="text-neutral-700"></span>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-5 space-y-4">
-                    <p class="text-sm text-slate-300 leading-relaxed">
-                        A gestão eficiente de frotas e logística requer acompanhamento automatizado de horas, combustível e registros de uso de veículos.
-                    </p>
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div>
-                            <h5 class="text-xs font-bold text-slate-200 uppercase">Apontamento de Veículos</h5>
-                            <p class="text-xs text-slate-400">Formulário responsivo integrado ao banco de dados.</p>
-                        </div>
-                        <a href="formulario_veiculos.html" target="_blank" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-5 py-3 rounded-lg flex items-center justify-center gap-2 transition shadow-lg shadow-blue-600/30">
-                            <span>Abrir Sistema</span>
-                            <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
+                <!-- SIMULADOR DE RISCO POR ÁREA -->
+                <div class="border border-neutral-300 p-5 bg-white space-y-3 font-sans-nyt">
+                    <h4 class="font-bold text-sm text-neutral-900 uppercase tracking-wider border-b border-neutral-200 pb-2">
+                        Simulador de Automação do Setor
+                    </h4>
+                    <p class="text-xs text-neutral-600">Selecione sua área de atuação para visualizar a estimativa de automação:</p>
 
-                <div class="px-4 py-2 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
-                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="thumbs-up" class="w-4 h-4"></i> Curtir (210)</button>
-                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="message-square" class="w-4 h-4"></i> Ver Instruções</button>
-                </div>
-            </article>
-
-            <!-- POST 4: Widget Simulador de Risco Directamente no Feed -->
-            <article id="simulador" class="feed-card p-5 space-y-4 border-purple-500/30">
-                <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
-                    <i data-lucide="cpu" class="w-6 h-6 text-purple-400"></i>
-                    <div>
-                        <h3 class="text-base font-bold text-slate-100">Simulador do Impacto da IA na sua Carreira</h3>
-                        <p class="text-xs text-slate-400">Selecione seu segmento para calcular a taxa de automação</p>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <select id="cargoSelect" onchange="calcularRisco()" class="w-full bg-slate-900 border border-slate-700 text-xs text-slate-200 rounded-lg px-3.5 py-3 focus:outline-none focus:border-purple-500">
-                        <option value="">-- Escolha uma área profissional --</option>
-                        <option value="operacoes">Operações, Logística e Frotas</option>
-                        <option value="tecnologia">Tecnologia, Dados e Software</option>
-                        <option value="atendimento">Atendimento e Suporte ao Cliente</option>
-                        <option value="saude">Saúde, Diagnóstico e Cuidados</option>
-                        <option value="financeiro">Finanças, Contabilidade e Análise</option>
+                    <select id="cargoSelect" onchange="calcularRisco()" class="w-full bg-neutral-100 border border-neutral-300 text-xs p-2 text-neutral-900 focus:outline-none">
+                        <option value="">-- Selecione uma Área --</option>
+                        <option value="operacoes">Operações & Logística</option>
+                        <option value="tecnologia">Tecnologia & Ciência de Dados</option>
+                        <option value="atendimento">Atendimento & Suporte</option>
+                        <option value="saude">Saúde & Diagnósticos</option>
+                        <option value="financeiro">Finanças & Auditoria</option>
                     </select>
 
-                    <div id="resultadoSimulacao" class="hidden space-y-3 p-4 bg-slate-900/90 rounded-xl border border-slate-800">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-slate-400">Estimativa de Automação:</span>
-                            <span id="riscoPorcentagem" class="text-2xl font-black text-purple-400">0%</span>
+                    <div id="resultadoSimulacao" class="hidden space-y-2 pt-2 border-t border-neutral-200">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="font-bold text-neutral-700">Automação Estimada:</span>
+                            <span id="riscoPorcentagem" class="font-extrabold text-neutral-900 text-base">0%</span>
                         </div>
-                        <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-                            <div id="riscoBarra" class="bg-purple-500 h-full w-0 transition-all duration-500"></div>
-                        </div>
-                        <p id="riscoDescricao" class="text-xs text-slate-300 leading-relaxed pt-1"></p>
+                        <p id="riscoDescricao" class="text-[11px] text-neutral-600 leading-normal"></p>
                     </div>
                 </div>
+
+            </aside>
+        </section>
+
+        <!-- SEÇÃO MÚLTIPLAS COLUNAS: BUSCADOR DE VAGAS & ARTIGOS EDITORIAIS -->
+        <section class="space-y-8 border-b border-neutral-300 pb-12">
+            
+            <div class="flex justify-between items-end border-b border-neutral-900 pb-2">
+                <div>
+                    <span class="text-xs font-sans-nyt font-bold tracking-widest text-neutral-500 uppercase">Módulo de Oportunidades</span>
+                    <h3 class="text-2xl font-bold font-headline text-neutral-900">Buscador & Diagnóstico de Vagas do Futuro</h3>
+                </div>
+                <span class="text-xs font-sans-nyt text-neutral-500 hidden sm:inline">Projeções atualizadas para o período 2026-2030</span>
+            </div>
+
+            <!-- Buscador Integrado -->
+            <div class="bg-neutral-100 p-4 border border-neutral-300 font-sans-nyt flex flex-col sm:flex-row gap-3">
+                <input type="text" id="termoBuscaVaga" onkeyup="filtrarVagas()" placeholder="Pesquisar por cargo ou competência (ex: IA, Dados, Operações)..." class="flex-1 bg-white border border-neutral-300 text-xs text-neutral-900 p-2.5 focus:outline-none focus:border-neutral-900">
+                <select id="filtroAreaVaga" onchange="filtrarVagas()" class="bg-white border border-neutral-300 text-xs text-neutral-900 p-2.5 focus:outline-none">
+                    <option value="todas">Todas as Áreas</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Operações">Operações</option>
+                    <option value="Saúde">Saúde</option>
+                    <option value="Finanças">Finanças</option>
+                </select>
+            </div>
+
+            <!-- Grid de Vagas -->
+            <div id="listaVagas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 font-sans-nyt">
+                <!-- Preenchido dinamicamente via Javascript -->
+            </div>
+        </section>
+
+        <!-- SEÇÃO EDITORIAL: TRÊS COLUNAS JORNALÍSTICAS -->
+        <section id="artigos" class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8">
+            
+            <article class="space-y-3">
+                <span class="text-[10px] font-sans-nyt font-bold tracking-widest text-neutral-500 uppercase">Análise de Tendência</span>
+                <h4 class="text-xl font-bold font-headline text-neutral-900 leading-snug">A Valorização Direta das Competências Humanas Insubstituíveis</h4>
+                <p class="text-xs text-neutral-700 leading-relaxed font-serif">
+                    Enquanto ferramentas operacionais executam análises preditivas, habilidades como liderança empática, negociação de alto nível e discernimento ético ganham maior valorização financeira nas corporações.
+                </p>
             </article>
 
-        </main>
+            <article class="space-y-3 md:border-l md:border-neutral-300 md:pl-8">
+                <span class="text-[10px] font-sans-nyt font-bold tracking-widest text-neutral-500 uppercase">Educação & Requalificação</span>
+                <h4 class="text-xl font-bold font-headline text-neutral-900 leading-snug">Microcredenciais Substituirão Diplomas Tradicionais?</h4>
+                <p class="text-xs text-neutral-700 leading-relaxed font-serif">
+                    Empresas de tecnologia e finanças estão priorizando certificações técnicas de curto prazo e proficiência comprovada em softwares de IA em detrimento de formações acadêmicas extensas.
+                </p>
+            </article>
 
-        <!-- SIDEBAR DIREITA (Notícias Rápidas & Anúncios) -->
-        <aside class="hidden lg:block lg:col-span-3 space-y-4 sticky top-20 h-fit">
-            
-            <!-- Widget de Tendências -->
-            <div class="feed-card p-4 space-y-3">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tendências para 2030</h3>
-                <div class="space-y-3 text-xs">
-                    <div class="border-b border-slate-800 pb-2">
-                        <p class="font-semibold text-slate-200">Reajuste Salarial Médio</p>
-                        <span class="text-emerald-400 font-bold">+18.2% para qualificados</span>
-                    </div>
-                    <div class="border-b border-slate-800 pb-2">
-                        <p class="font-semibold text-slate-200">Rotinas Afetadas</p>
-                        <span class="text-amber-400 font-bold">32.5% das tarefas manuais</span>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-slate-200">Setor em Alta</p>
-                        <span class="text-blue-400 font-bold">Engenharia de Dados e Logística</span>
-                    </div>
+            <article class="space-y-3 md:border-l md:border-neutral-300 md:pl-8">
+                <span class="text-[10px] font-sans-nyt font-bold tracking-widest text-neutral-500 uppercase">Perspectiva Global</span>
+                <h4 class="text-xl font-bold font-headline text-neutral-900 leading-snug">Trabalho Remoto Transfronteiriço Potencializado por IA</h4>
+                <p class="text-xs text-neutral-700 leading-relaxed font-serif">
+                    Ferramentas de tradução simultânea em tempo real e colaboração autônoma estão permitindo que talentos de mercados emergentes disputem vagas globais diretamente de seus países de origem.
+                </p>
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- Rodapé Editorial Estilo NYT -->
+    <footer class="border-t-2 border-neutral-900 bg-neutral-100 py-8 text-neutral-700 font-sans-nyt text-xs mt-12">
+        <div class="max-w-7xl mx-auto px-4 space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-neutral-300 pb-6 gap-4">
+                <div>
+                    <h2 class="font-headline font-bold text-xl text-neutral-900">The Future Work Report</h2>
+                    <p class="text-[11px] text-neutral-500">Publicação dedicada às análises de trabalho, requalificação e automação corporativa.</p>
+                </div>
+                <div class="flex gap-4 text-neutral-600 font-medium">
+                    <a href="#ferramentas-diagnostico" class="hover:underline">Analisador de Cargo</a>
+                    <a href="#busca-vagas" class="hover:underline">Vagas 2030</a>
+                    <a href="#artigos" class="hover:underline">Artigos</a>
                 </div>
             </div>
-
-            <!-- Banner AdSense Display (300x250) -->
-            <div class="bg-slate-900/80 border border-dashed border-slate-700/80 rounded-xl p-6 text-center text-xs text-slate-400 min-h-[220px] flex flex-col justify-center items-center">
-                <span class="bg-slate-800 text-slate-400 text-[10px] uppercase px-2 py-0.5 rounded font-bold mb-2">Publicidade</span>
-                <p class="text-slate-300 font-medium">Espaço AdSense (300x250)</p>
+            <div class="text-center text-[11px] text-neutral-500">
+                <p>© 2026 The Future Work Report. Todos os direitos reservados. Projeções e dados analíticos simulados até 2030.</p>
             </div>
-
-        </aside>
-
-    </div>
-
-    <!-- Rodapé Minimalista -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-slate-500 text-xs mt-12">
-        <p>© 2030 Feed de Impacto da Inteligência Artificial. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
-    <!-- Scripts de Funcionalidades -->
+    <!-- Lógica de Negócio e Dados -->
     <script>
+        // Banco de Dados de Vagas
+        const bancoVagas = [
+            {
+                titulo: "Engenheiro de IA & Prompts",
+                area: "Tecnologia",
+                empresa: "TechCorp Global",
+                demanda2030: "Muito Alta (+48%)",
+                habilidades: ["Python", "LLMs", "Arquitetura Cloud"],
+                descricao: "Liderar a implementação de agentes virtuais e integração de modelos generativos na infraestrutura."
+            },
+            {
+                titulo: "Analista de Processos Automatizados",
+                area: "Operações",
+                empresa: "LogiFlow Brasil",
+                demanda2030: "Alta (+25%)",
+                habilidades: ["Análise de Dados", "Otimização de Fluxos", "PowerBI"],
+                descricao: "Supervisionar fluxos operacionais gerenciados por sistemas preditivos e monitorar métricas."
+            },
+            {
+                titulo: "Especialista em Triagem com IA",
+                area: "Saúde",
+                empresa: "HealthTech Labs",
+                demanda2030: "Alta (+35%)",
+                habilidades: ["Análise de Exames", "Prontuário Digital"],
+                descricao: "Interpretar relatórios automatizados de IA para triagem rápida de pacientes e suporte pré-clínico."
+            },
+            {
+                titulo: "Auditor de Algoritmos Financeiros",
+                area: "Finanças",
+                empresa: "FinData Advisory",
+                demanda2030: "Moderada (+18%)",
+                habilidades: ["Auditoria", "Compliance", "Modelos Preditivos"],
+                descricao: "Garantir conformidade e mitigar vieses em algoritmos autônomos de análise de risco e crédito."
+            }
+        ];
+
         document.addEventListener('DOMContentLoaded', () => {
-            // Inicializar Lucide Icons
             if (window.lucide) {
                 lucide.createIcons();
             }
-
-            // Inicializar Gráfico de Setores no Feed
-            const canvasElem = document.getElementById('feedSectorChart');
-            if (canvasElem && window.Chart) {
-                const ctx = canvasElem.getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Operações', 'Tecnologia', 'Atendimento', 'Saúde', 'Finanças'],
-                        datasets: [
-                            {
-                                label: 'Automação (%)',
-                                data: [45, 20, 55, 15, 35],
-                                backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                                borderRadius: 4
-                            },
-                            {
-                                label: 'Novas Vagas (%)',
-                                data: [15, 50, 10, 35, 25],
-                                backgroundColor: 'rgba(168, 85, 247, 0.8)',
-                                borderRadius: 4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: { color: '#94a3b8', font: { size: 10 } },
-                                grid: { color: 'rgba(255, 255, 255, 0.05)' }
-                            },
-                            x: {
-                                ticks: { color: '#94a3b8', font: { size: 10 } },
-                                grid: { display: false }
-                            }
-                        },
-                        plugins: {
-                            legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
-                        }
-                    }
-                });
-            }
+            renderizarGrafico();
+            renderizarVagas(bancoVagas);
         });
 
-        // Função do Simulador de Impacto
+        // Renderizar Lista de Vagas
+        function renderizarVagas(lista) {
+            const container = document.getElementById('listaVagas');
+            if (!container) return;
+
+            if (lista.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-xs text-neutral-500 text-center py-4">Nenhuma vaga encontrada para os filtros selecionados.</p>`;
+                return;
+            }
+
+            container.innerHTML = lista.map(vaga => `
+                <div class="bg-white p-4 border border-neutral-300 space-y-2 flex flex-col justify-between hover:border-neutral-900 transition">
+                    <div class="space-y-1">
+                        <span class="text-[9px] font-bold uppercase tracking-widest text-neutral-500 block">${vaga.area}</span>
+                        <h4 class="font-bold text-sm text-neutral-900 leading-snug">${vaga.titulo}</h4>
+                        <p class="text-[11px] text-neutral-600 font-medium">${vaga.empresa}</p>
+                        <p class="text-xs text-neutral-700 pt-1 font-serif leading-relaxed">${vaga.descricao}</p>
+                    </div>
+                    <div class="pt-3 border-t border-neutral-200 space-y-2">
+                        <div class="flex flex-wrap gap-1">
+                            ${vaga.habilidades.map(h => `<span class="text-[9px] bg-neutral-100 text-neutral-700 px-1.5 py-0.5 border border-neutral-300">${h}</span>`).join('')}
+                        </div>
+                        <span class="inline-block text-[10px] font-bold text-neutral-900 bg-neutral-100 px-2 py-0.5 border border-neutral-300">
+                            Demanda 2030: ${vaga.demanda2030}
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filtro do Buscador
+        function filtrarVagas() {
+            const termo = document.getElementById('termoBuscaVaga').value.toLowerCase();
+            const area = document.getElementById('filtroAreaVaga').value;
+
+            const filtradas = bancoVagas.filter(vaga => {
+                const bateTermo = vaga.titulo.toLowerCase().includes(termo) || 
+                                  vaga.habilidades.some(h => h.toLowerCase().includes(termo)) ||
+                                  vaga.descricao.toLowerCase().includes(termo);
+                const bateArea = area === 'todas' || vaga.area === area;
+                return bateTermo && bateArea;
+            });
+
+            renderizarVagas(filtradas);
+        }
+
+        // Ferramenta: Analisador de Cargo / CV 2030
+        function analisarCV(event) {
+            event.preventDefault();
+            const vaga = document.getElementById('vagaDesejada').value;
+            const cvText = document.getElementById('textoCV').value.toLowerCase();
+
+            const resultadoDiv = document.getElementById('resultadoCV');
+            const scoreElem = document.getElementById('cvAderenciaScore');
+            const pontoForteElem = document.getElementById('cvPontoForte');
+            const gapsElem = document.getElementById('cvGaps');
+            const recElem = document.getElementById('cvRecomendacao');
+
+            const keywords2030 = ['dados', 'ia', 'inteligencia artificial', 'automação', 'python', 'gestao', 'dashboard', 'analytics', 'processos', 'excel', 'liderança', 'projeto', 'cloud'];
+            let pontuacao = 42;
+
+            let encontradas = [];
+            keywords2030.forEach(kw => {
+                if (cvText.includes(kw)) {
+                    pontuacao += 6;
+                    encontradas.push(kw);
+                }
+            });
+
+            if (pontuacao > 96) pontuacao = 96;
+
+            scoreElem.innerText = `${pontuacao}%`;
+            
+            if (encontradas.length > 0) {
+                pontoForteElem.innerText = `O perfil apresenta familiaridade com competências de transição (${encontradas.slice(0, 3).join(', ')}), essenciais para o cargo de "${vaga}".`;
+            } else {
+                pontoForteElem.innerText = `Perfil com experiência tradicional relevante, necessitando incorporação de vocabulário técnico para adequação a "${vaga}".`;
+            }
+
+            gapsElem.innerText = `Para maximizar o alinhamento com as exigências de 2030, recomenda-se focar em análise quantitativa de dados e domínio prático de ferramentas baseadas em IA.`;
+            recElem.innerText = `Completar requalificação focada em fluxos de trabalho digitais e automação para a função de ${vaga}.`;
+
+            resultadoDiv.classList.remove('hidden');
+        }
+
+        // Simulador de Risco Setorial
         function calcularRisco() {
             const select = document.getElementById('cargoSelect');
             const valor = select ? select.value : '';
             const res = document.getElementById('resultadoSimulacao');
             const pct = document.getElementById('riscoPorcentagem');
-            const barra = document.getElementById('riscoBarra');
             const desc = document.getElementById('riscoDescricao');
 
             if (!valor || !res) {
@@ -380,33 +460,64 @@
             res.classList.remove('hidden');
 
             const dados = {
-                operacoes: {
-                    porcentagem: "68%",
-                    texto: "Processos manuais e acompanhamento de frotas serão automatizados por IoT e sistemas de apontamento digital."
-                },
-                tecnologia: {
-                    porcentagem: "18%",
-                    texto: "Alta demanda em engenharia de dados, integração de modelos de IA e arquitetura de sistemas."
-                },
-                atendimento: {
-                    porcentagem: "74%",
-                    texto: "Atendimentos repetitivos de nível 1 serão realizados por agentes virtuais conversacionais."
-                },
-                saude: {
-                    porcentagem: "12%",
-                    texto: "Assistência médica com suporte preditivo para exames e triagens primárias."
-                },
-                financeiro: {
-                    porcentagem: "42%",
-                    texto: "Reconciliação e auditorias financeiras rotineiras automatizadas por inteligência de dados."
-                }
+                operacoes: { porcentagem: "68%", texto: "Processos de conferência e acompanhamento físico terão automação elevada por sistemas autônomos." },
+                tecnologia: { porcentagem: "18%", texto: "Baixo risco de substituição direta; alta exigência por arquitetura de dados e desenvolvimento de IA." },
+                atendimento: { porcentagem: "74%", texto: "Atividades repetitivas de suporte serão majoritariamente resolvidas por agentes computacionais autônomos." },
+                saude: { porcentagem: "12%", texto: "Interação presencial preservada, com apoio substancial de sistemas preditivos de diagnóstico." },
+                financeiro: { porcentagem: "42%", texto: "Auditorias de rotina e reconciliação contábil migrarão progressivamente para modelos automatizados." }
             };
 
             const info = dados[valor];
             if (info) {
                 pct.innerText = info.porcentagem;
-                barra.style.width = info.porcentagem;
                 desc.innerText = info.texto;
+            }
+        }
+
+        // Gráfico Estilo NYT (Preto e Branco / Minimalista)
+        function renderizarGrafico() {
+            const canvasElem = document.getElementById('nytSectorChart');
+            if (canvasElem && window.Chart) {
+                const ctx = canvasElem.getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Operações', 'Tecnologia', 'Atendimento', 'Saúde', 'Finanças'],
+                        datasets: [
+                            {
+                                label: 'Índice de Automação de Rotinas (%)',
+                                data: [68, 18, 74, 12, 42],
+                                backgroundColor: '#ffffff',
+                                border font: { family: 'Inter' }
+                            },
+                            {
+                                label: 'Demanda por Qualificação em IA (%)',
+                                data: [35, 82, 20, 55, 60],
+                                backgroundColor: '#888888'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { color: '#cccccc', font: { family: 'Inter', size: 10 } },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            },
+                            x: {
+                                ticks: { color: '#ffffff', font: { family: 'Inter', size: 10 } },
+                                grid: { display: false }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: { color: '#ffffff', font: { family: 'Inter', size: 11 } }
+                            }
+                        }
+                    }
+                });
             }
         }
     </script>
