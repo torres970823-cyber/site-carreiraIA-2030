@@ -1,16 +1,138 @@
-import streamlit as st
-import streamlit.components.v1 as components
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impacto da IA no Mercado de Trabalho 2030 & Avaliador de Currículo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#0a0d14',
+                            card: 'rgba(16, 22, 36, 0.7)',
+                            border: 'rgba(56, 189, 248, 0.2)',
+                            neonBlue: '#38bdf8',
+                            neonPurple: '#a855f7',
+                            neonPink: '#ec4899',
+                            neonGreen: '#22c55e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060911;
+            color: #f1f5f9;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
 
-# Configuração da página
-st.set_page_config(
-    page_title="Impacto da IA 2030 & Avaliador de Currículo",
-    page_icon="🤖",
-    layout="wide"
-)
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
 
-# Renderiza a interface interativa (HTML/JS) no Streamlit
-with open("index.html", "r", encoding="utf-8") as f:
-    html_code = f.read()
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-# Exibe a aplicação web
-components.html(html_code, height=900, scrolling=True)
+        .glass-card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 12px 40px -10px rgba(56, 189, 248, 0.25);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060911;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 glass-card border-b border-slate-800/80 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="p-2 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/20">
+                    <i data-lucide="cpu" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gradient">AI Horizon 2030</h1>
+                    <p class="text-xs text-slate-400">O Impacto da IA no Mercado de Trabalho</p>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                <a href="#dashboard" class="hover:text-cyan-400 transition-colors">Dashboard</a>
+                <a href="#matriz" class="hover:text-cyan-400 transition-colors">Matriz Salarial</a>
+                <a href="#simulator" class="hover:text-cyan-400 transition-colors">Simulador 2030</a>
+                <a href="#cv-analyzer" class="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold shadow-lg shadow-cyan-500/20 hover:opacity-90 transition-all flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4"></i> Analisar Currículo
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-12 flex-grow w-full">
+
+        <!-- Hero Section -->
+        <section class="text-center space-y-4 py-6">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                Projeções e Análise de Tendências até 2030
+            </span>
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                Como a Inteligência Artificial moldará <br>
+                <span class="text-gradient">a sua carreira nos próximos anos?</span>
+            </h2>
+            <p class="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">
+                Explore estatísticas setoriais, simule a sua transição de carreira e submeta seu currículo para uma análise de perfil adaptado às demandas do mercado em 2030.
+            </p>
+        </section>
+
+        <!-- Dynamic KPIs Grid -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass-card p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-medium uppercase tracking-wider">Média de Automação</span>
+                    <i data-lucide="bot" class="w-5 h-5 text-cyan-400"></i>
+                </div>
+                <div class="text-3xl font-extrabold text-white">42.8%</div>
+                <p class="text-xs text-emerald-400 mt-1 flex items-center gap-1">
+                    <i data-luc
