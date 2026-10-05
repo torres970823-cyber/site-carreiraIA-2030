@@ -8,8 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -51,36 +49,16 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        .glass-card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card-hover:hover {
-            transform: translateY(-4px);
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 12px 40px -10px rgba(56, 189, 248, 0.25);
-        }
-
         .text-gradient {
             background: linear-gradient(135deg, #38bdf8 0%, #a855f7 50%, #ec4899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #060911;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #38bdf8;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #060911; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased">
@@ -135,4 +113,130 @@
                 </div>
                 <div class="text-3xl font-extrabold text-white">42.8%</div>
                 <p class="text-xs text-emerald-400 mt-1 flex items-center gap-1">
-                    <i data-luc
+                    <i data-lucide="trending-up" class="w-3 h-3"></i> Tarefas rotineiras automatizadas
+                </p>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-medium uppercase tracking-wider">Crescimento Tech</span>
+                    <i data-lucide="zap" class="w-5 h-5 text-purple-400"></i>
+                </div>
+                <div class="text-3xl font-extrabold text-white">+38%</div>
+                <p class="text-xs text-purple-300 mt-1 flex items-center gap-1">
+                    Demanda em papéis orientados a IA
+                </p>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-medium uppercase tracking-wider">Requalificação Foco</span>
+                    <i data-lucide="brain-circuit" class="w-5 h-5 text-pink-400"></i>
+                </div>
+                <div class="text-3xl font-extrabold text-white">120h/ano</div>
+                <p class="text-xs text-pink-300 mt-1 flex items-center gap-1">
+                    Investimento contínuo em Upskilling
+                </p>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-medium uppercase tracking-wider">Surgimento de Vagas</span>
+                    <i data-lucide="sparkles" class="w-5 h-5 text-emerald-400"></i>
+                </div>
+                <div class="text-3xl font-extrabold text-white">18.4M</div>
+                <p class="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                    Novos cargos híbridos projetados
+                </p>
+            </div>
+        </section>
+
+        <!-- Dashboard Charts Section -->
+        <section id="dashboard" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="bar-chart-2" class="w-5 h-5 text-cyan-400"></i>
+                        Risco de Automação por Setor (%)
+                    </h3>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="sectorChart"></canvas>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="pie-chart" class="w-5 h-5 text-purple-400"></i>
+                        Demanda por Competências para 2030
+                    </h3>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Salary & Sector Impact Matrix Section -->
+        <section id="matriz" class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div>
+                    <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="dollar-sign" class="w-6 h-6 text-emerald-400"></i>
+                        Matriz de Disrupção Salarial & Vagas 2030
+                    </h3>
+                    <p class="text-sm text-slate-400">Projeções médias de evolução salarial e saldo líquido de postos de trabalho pós-integração de IA.</p>
+                </div>
+                <select id="matrixFilter" class="bg-slate-900 border border-slate-700 text-sm text-slate-200 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-cyan-500" onchange="renderSalaryMatrix()">
+                    <option value="all">Todos os Setores</option>
+                    <option value="tech">Tecnologia & TI</option>
+                    <option value="finance">Finanças & Operações</option>
+                    <option value="health">Saúde & Cuidados</option>
+                    <option value="support">Atendimento ao Cliente</option>
+                </select>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-300">
+                    <thead class="bg-slate-900/80 text-xs uppercase text-slate-400 border-b border-slate-800">
+                        <tr>
+                            <th class="py-3 px-4">Setor / Área</th>
+                            <th class="py-3 px-4">Média Salarial Pré-IA</th>
+                            <th class="py-3 px-4">Projeção Salarial 2030</th>
+                            <th class="py-3 px-4">Variação %</th>
+                            <th class="py-3 px-4">Saldo Líquido de Vagas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrixTableBody" class="divide-y divide-slate-800/60">
+                        <!-- Content populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Simulator Section -->
+        <section id="simulator" class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800">
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <i data-lucide="sliders" class="w-6 h-6 text-cyan-400"></i>
+                    Simulador What-If: Requalificação & Resiliência
+                </h3>
+                <p class="text-sm text-slate-400">Ajuste seu investimento em aprendizado e descubra o impacto na sua resiliência profissional para 2030.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Sua Área Profissional Atual</label>
+                        <select id="simSector" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-cyan-500 outline-none">
+                            <option value="0.65">Atendimento / Suporte ao Cliente</option>
+                            <option value="0.55">Finanças e Operações Contábeis</option>
+                            <option value="0.45">Administração e RH</option>
+                            <option value="0.30">Engenharia e Desenvolvimento de Software</option>
+                            <option value="0.20">Saúde e Cuidados Humanizados</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="
