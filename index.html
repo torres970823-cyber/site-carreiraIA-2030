@@ -152,4 +152,263 @@
                     </p>
                     
                     <div class="grid grid-cols-2 gap-3 pt-2">
-                        <
+                        <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase block font-semibold">Criação Líquida</span>
+                            <span class="text-xl font-extrabold text-emerald-400">+12.5 Mi</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">Postos especializados</span>
+                        </div>
+                        <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase block font-semibold">Demanda Educacional</span>
+                            <span class="text-xl font-extrabold text-purple-400">64%</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">Exigem IA/Dados</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reações e Ações do Post -->
+                <div class="px-4 py-2 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
+                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="thumbs-up" class="w-4 h-4"></i> Curtir (142)</button>
+                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="message-square" class="w-4 h-4"></i> Comentar (28)</button>
+                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="share-2" class="w-4 h-4"></i> Compartilhar</button>
+                </div>
+            </article>
+
+            <!-- POST 2: Gráfico Interativo no Feed (Métricas por Setor) -->
+            <article id="graficos" class="feed-card overflow-hidden">
+                <div class="p-4 flex items-center justify-between border-b border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-indigo-600/30 border border-indigo-500 flex items-center justify-center text-indigo-400">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-100">Painel Estatístico Avançado</h4>
+                            <p class="text-[11px] text-slate-400">Atualização em tempo real</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 space-y-3">
+                    <p class="text-sm text-slate-300">
+                        Comparativo percentual de <strong>automação de tarefas rotineiras vs. criação de novas posições</strong> por setor econômico:
+                    </p>
+                    <div class="relative h-64 w-full bg-slate-900/60 p-2 rounded-xl border border-slate-800">
+                        <canvas id="feedSectorChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="px-4 py-2 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
+                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="thumbs-up" class="w-4 h-4"></i> Útil (89)</button>
+                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="share-2" class="w-4 h-4"></i> Compartilhar</button>
+                </div>
+            </article>
+
+            <!-- POST 3: Ferramenta Prática Integrada (Apontamento de Frota) -->
+            <article class="feed-card overflow-hidden border-blue-500/40">
+                <div class="p-4 flex items-center justify-between border-b border-slate-800 bg-blue-950/20">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600/30 border border-emerald-500 flex items-center justify-center text-emerald-400">
+                            <i data-lucide="truck" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-100">Solução Prática: Sistema de Frotas</h4>
+                            <p class="text-[11px] text-emerald-400 font-semibold">Ferramenta Externa Pronta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-5 space-y-4">
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        A gestão eficiente de frotas e logística requer acompanhamento automatizado de horas, combustível e registros de uso de veículos.
+                    </p>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <h5 class="text-xs font-bold text-slate-200 uppercase">Apontamento de Veículos</h5>
+                            <p class="text-xs text-slate-400">Formulário responsivo integrado ao banco de dados.</p>
+                        </div>
+                        <a href="formulario_veiculos.html" target="_blank" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-5 py-3 rounded-lg flex items-center justify-center gap-2 transition shadow-lg shadow-blue-600/30">
+                            <span>Abrir Sistema</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="px-4 py-2 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
+                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="thumbs-up" class="w-4 h-4"></i> Curtir (210)</button>
+                    <button class="flex items-center gap-1.5 hover:text-blue-400 transition"><i data-lucide="message-square" class="w-4 h-4"></i> Ver Instruções</button>
+                </div>
+            </article>
+
+            <!-- POST 4: Widget Simulador de Risco Directamente no Feed -->
+            <article id="simulador" class="feed-card p-5 space-y-4 border-purple-500/30">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                    <i data-lucide="cpu" class="w-6 h-6 text-purple-400"></i>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-100">Simulador do Impacto da IA na sua Carreira</h3>
+                        <p class="text-xs text-slate-400">Selecione seu segmento para calcular a taxa de automação</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <select id="cargoSelect" onchange="calcularRisco()" class="w-full bg-slate-900 border border-slate-700 text-xs text-slate-200 rounded-lg px-3.5 py-3 focus:outline-none focus:border-purple-500">
+                        <option value="">-- Escolha uma área profissional --</option>
+                        <option value="operacoes">Operações, Logística e Frotas</option>
+                        <option value="tecnologia">Tecnologia, Dados e Software</option>
+                        <option value="atendimento">Atendimento e Suporte ao Cliente</option>
+                        <option value="saude">Saúde, Diagnóstico e Cuidados</option>
+                        <option value="financeiro">Finanças, Contabilidade e Análise</option>
+                    </select>
+
+                    <div id="resultadoSimulacao" class="hidden space-y-3 p-4 bg-slate-900/90 rounded-xl border border-slate-800">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Estimativa de Automação:</span>
+                            <span id="riscoPorcentagem" class="text-2xl font-black text-purple-400">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                            <div id="riscoBarra" class="bg-purple-500 h-full w-0 transition-all duration-500"></div>
+                        </div>
+                        <p id="riscoDescricao" class="text-xs text-slate-300 leading-relaxed pt-1"></p>
+                    </div>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- SIDEBAR DIREITA (Notícias Rápidas & Anúncios) -->
+        <aside class="hidden lg:block lg:col-span-3 space-y-4 sticky top-20 h-fit">
+            
+            <!-- Widget de Tendências -->
+            <div class="feed-card p-4 space-y-3">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tendências para 2030</h3>
+                <div class="space-y-3 text-xs">
+                    <div class="border-b border-slate-800 pb-2">
+                        <p class="font-semibold text-slate-200">Reajuste Salarial Médio</p>
+                        <span class="text-emerald-400 font-bold">+18.2% para qualificados</span>
+                    </div>
+                    <div class="border-b border-slate-800 pb-2">
+                        <p class="font-semibold text-slate-200">Rotinas Afetadas</p>
+                        <span class="text-amber-400 font-bold">32.5% das tarefas manuais</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-200">Setor em Alta</p>
+                        <span class="text-blue-400 font-bold">Engenharia de Dados e Logística</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner AdSense Display (300x250) -->
+            <div class="bg-slate-900/80 border border-dashed border-slate-700/80 rounded-xl p-6 text-center text-xs text-slate-400 min-h-[220px] flex flex-col justify-center items-center">
+                <span class="bg-slate-800 text-slate-400 text-[10px] uppercase px-2 py-0.5 rounded font-bold mb-2">Publicidade</span>
+                <p class="text-slate-300 font-medium">Espaço AdSense (300x250)</p>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- Rodapé Minimalista -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-slate-500 text-xs mt-12">
+        <p>© 2030 Feed de Impacto da Inteligência Artificial. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scripts de Funcionalidades -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar Lucide Icons
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            // Inicializar Gráfico de Setores no Feed
+            const canvasElem = document.getElementById('feedSectorChart');
+            if (canvasElem && window.Chart) {
+                const ctx = canvasElem.getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Operações', 'Tecnologia', 'Atendimento', 'Saúde', 'Finanças'],
+                        datasets: [
+                            {
+                                label: 'Automação (%)',
+                                data: [45, 20, 55, 15, 35],
+                                backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                                borderRadius: 4
+                            },
+                            {
+                                label: 'Novas Vagas (%)',
+                                data: [15, 50, 10, 35, 25],
+                                backgroundColor: 'rgba(168, 85, 247, 0.8)',
+                                borderRadius: 4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { color: '#94a3b8', font: { size: 10 } },
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                            },
+                            x: {
+                                ticks: { color: '#94a3b8', font: { size: 10 } },
+                                grid: { display: false }
+                            }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+                        }
+                    }
+                });
+            }
+        });
+
+        // Função do Simulador de Impacto
+        function calcularRisco() {
+            const select = document.getElementById('cargoSelect');
+            const valor = select ? select.value : '';
+            const res = document.getElementById('resultadoSimulacao');
+            const pct = document.getElementById('riscoPorcentagem');
+            const barra = document.getElementById('riscoBarra');
+            const desc = document.getElementById('riscoDescricao');
+
+            if (!valor || !res) {
+                if (res) res.classList.add('hidden');
+                return;
+            }
+
+            res.classList.remove('hidden');
+
+            const dados = {
+                operacoes: {
+                    porcentagem: "68%",
+                    texto: "Processos manuais e acompanhamento de frotas serão automatizados por IoT e sistemas de apontamento digital."
+                },
+                tecnologia: {
+                    porcentagem: "18%",
+                    texto: "Alta demanda em engenharia de dados, integração de modelos de IA e arquitetura de sistemas."
+                },
+                atendimento: {
+                    porcentagem: "74%",
+                    texto: "Atendimentos repetitivos de nível 1 serão realizados por agentes virtuais conversacionais."
+                },
+                saude: {
+                    porcentagem: "12%",
+                    texto: "Assistência médica com suporte preditivo para exames e triagens primárias."
+                },
+                financeiro: {
+                    porcentagem: "42%",
+                    texto: "Reconciliação e auditorias financeiras rotineiras automatizadas por inteligência de dados."
+                }
+            };
+
+            const info = dados[valor];
+            if (info) {
+                pct.innerText = info.porcentagem;
+                barra.style.width = info.porcentagem;
+                desc.innerText = info.texto;
+            }
+        }
+    </script>
+</body>
+</html>
