@@ -1,0 +1,16 @@
+import streamlit as st
+import streamlit.components.v1 as components
+
+# Configuração da página
+st.set_page_config(
+    page_title="Impacto da IA 2030 & Avaliador de Currículo",
+    page_icon="🤖",
+    layout="wide"
+)
+
+# Renderiza a interface interativa (HTML/JS) no Streamlit
+with open("index.html", "r", encoding="utf-8") as f:
+    html_code = f.read()
+
+# Exibe a aplicação web
+components.html(html_code, height=900, scrolling=True)
